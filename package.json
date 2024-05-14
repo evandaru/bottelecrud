@@ -1,0 +1,11 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "main": "bot.js",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "lowdb": "^7.0.1",
+    "node-telegram-bot-api": "^0.65.1"
+  }
+}
