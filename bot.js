@@ -84,7 +84,6 @@ bot.onText(/\/delete (\d+)/, async (msg, match) => {
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
 
-    // send a message to the chat acknowledging receipt of their message
     bot.sendMessage(chatId, `
     anu susss
     /add
