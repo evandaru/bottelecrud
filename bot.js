@@ -93,3 +93,5 @@ bot.on('message', (msg) => {
     
     `);
 });
+
+bot.on("polling_error", (msg) => console.log(msg));
