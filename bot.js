@@ -76,16 +76,17 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 //bot ai
 bot.onText(/\/a (.+)/, async (msg, match) => {
     const chatId = msg.chat.id;
-    const query = match[1];
+    const query = match[1] + " tolong gunakan bahasa Indonesia untuk menjelaskannya";
 
     try {
         const response = await getGroqResponse(query);
         bot.sendMessage(chatId, response, { parse_mode: 'Markdown' });
     } catch (error) {
         console.error(error);
-        bot.sendMessage(chatId, 'Error occurred while fetching response.');
+        bot.sendMessage(chatId, 'Terjadi kesalahan saat mengambil respon.');
     }
 });
+
 
 // Listen for messages that are replied to by users
 bot.on('message', async (msg) => {
