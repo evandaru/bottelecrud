@@ -159,7 +159,7 @@ bot.on('message', (msg) => {
     Cara pake bot ini
     /a [pertanyaan] - Menggunakan AI untuk menjawab pertanyaan
     `);
-    `);
+    
 });
 
 bot.on("polling_error", (msg) => console.log(msg));
