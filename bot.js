@@ -76,7 +76,7 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 //bot ai
 bot.onText(/\/a (.+)/, async (msg, match) => {
     const chatId = msg.chat.id;
-    const query = match[1] + " tolong gunakan bahasa Indonesia untuk menjelaskannya";
+    const query = match[1] + ", tolong gunakan bahasa Indonesia untuk menjelaskannya";
 
     try {
         const response = await getGroqResponse(query);
