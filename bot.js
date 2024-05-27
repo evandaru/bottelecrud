@@ -1,17 +1,12 @@
-import { JSONFilePreset } from 'lowdb/node';
-import TelegramBot from 'node-telegram-bot-api';
-import Bot from 'grammy';
-import Groq from 'groq-sdk';
-import ytdl from 'ytdl-core';
-import fs from 'fs';
-import { pipeline } from 'stream/promises';
-import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
-
+import { JSONFilePreset } from 'lowdb/node'
+import TelegramBot from 'node-telegram-bot-api'
+import Bot from 'grammy'
+import Groq from 'groq-sdk'
 const token = '6918176800:AAEex7zg8TmO3HMpecVlmAV3Vm3liA8D5bQ';
 
 const groq = new Groq({
-    apiKey: "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"
+    apiKey:
+        "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"
 });
 
 async function getGroqResponse(query) {
@@ -37,8 +32,8 @@ async function getGroqResponse(query) {
 }
 
 // Read or create db.json
-const defaultData = { posts: [] };
-const db = await JSONFilePreset('db.json', defaultData);
+const defaultData = { posts: [] }
+const db = await JSONFilePreset('db.json', defaultData)
 
 // Update db.json
 // await db.update(({ posts }) => posts.push('hello world'))
@@ -48,13 +43,12 @@ const db = await JSONFilePreset('db.json', defaultData);
 // db.data.posts.push('hello world')
 // await db.write()
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+
+// replace the value below with the Telegram token you receive from @BotFather
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {
-    polling: true,
-    request: {
+    polling: true, request: {
         agentOptions: {
             keepAlive: true,
             family: 4
@@ -62,43 +56,24 @@ const bot = new TelegramBot(token, {
     }
 });
 
-// Fungsi untuk mendownload video YouTube dengan kualitas rendah
-async function downloadYouTubeVideoLowQuality(url, filePath) {
-    const stream = ytdl(url, { quality: 'lowestvideo' });
-    await pipeline(stream, fs.createWriteStream(filePath));
-}
-
-// Menghandle perintah /yt
-bot.onText(/\/yt (.+)/, async (msg, match) => {
-    const chatId = msg.chat.id;
-    const url = match[1];
-    const filePath = resolve(__dirname, 'video.mp4');
-
-    try {
-        bot.sendMessage(chatId, 'Downloading video...');
-
-        await downloadYouTubeVideoLowQuality(url, filePath);
-        
-        bot.sendMessage(chatId, 'Sending video...');
-
-        await bot.sendVideo(chatId, filePath);
-        
-        // Menghapus file setelah dikirim untuk menghemat ruang
-        fs.unlinkSync(filePath);
-    } catch (error) {
-        console.error(error);
-        bot.sendMessage(chatId, 'Failed to download or send the video.');
-    }
-});
-
 // Matches "/echo [whatever]"
 bot.onText(/\/echo (.+)/, (msg, match) => {
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
+
     const chatId = msg.chat.id;
     const resp = match[1]; // the captured "whatever"
+
+    // send back the matched "whatever" to the chat
     bot.sendMessage(chatId, resp);
 });
 
-// Bot AI
+// Listen for any kind of message. There are different kinds of
+// messages.
+
+
+//bot ai
 bot.onText(/\/a (.+)/, async (msg, match) => {
     const chatId = msg.chat.id;
     const query = match[1] + ", tolong gunakan bahasa Indonesia untuk menjelaskannya";
@@ -111,6 +86,7 @@ bot.onText(/\/a (.+)/, async (msg, match) => {
         bot.sendMessage(chatId, 'Terjadi kesalahan saat mengambil respon.');
     }
 });
+
 
 // Listen for messages that are replied to by users
 bot.on('message', async (msg) => {
@@ -128,6 +104,7 @@ bot.on('message', async (msg) => {
         }
     }
 });
+
 
 // Create
 bot.onText(/\/c (.+)/, async (msg, match) => {
@@ -179,12 +156,9 @@ bot.on('message', (msg) => {
 
     bot.sendMessage(chatId, `
     Cara pake bot ini
-    /yt [URL] - Download video dari YouTube
-    /c [pesan] - Menambahkan pesan ke database
-    /r - Membaca semua pesan dari database
-    /u [nomor] [pesan baru] - Memperbarui pesan
-    /d [nomor] - Menghapus pesan
+    Cara pake bot ini
     /a [pertanyaan] - Menggunakan AI untuk menjawab pertanyaan
+    `);
     `);
 });
 
