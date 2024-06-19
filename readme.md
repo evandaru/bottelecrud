@@ -2,6 +2,8 @@
 
 adalah bot sederhana yang di buat menggunakan nodejs dan juga database lowdb
 
+[Lele Bot](https://t.me//lelee2_bot)
+
 ## Fitur-fitur Bot
 
 ### CRUD (Create, Read, Update, Delete)
@@ -27,9 +29,7 @@ Berikut adalah perintah-perintah yang dapat Anda gunakan pada bot ini:
 - `/d [nomor]`: Menghapus pesan berdasarkan nomor pesan.
 - `/a [pertanyaan]`: Menggunakan AI untuk menjawab pertanyaan Anda.
 
-## Tahap Pengembangan
+## Sekedar info
 
 Bot ini masih dalam tahap pengembangan dan akan terus diperbarui dengan fitur-fitur baru. Kami mengapresiasi setiap masukan dan saran yang dapat membantu kami untuk memperbaiki bot ini.
 
-## Tautan Bot
-[Lele Bot](https://t.me//lelee2_bot)
